@@ -27,8 +27,8 @@ public class DBConnection {
         this.connection= DriverManager.getConnection(url,username,password);
       }
     } catch(Exception e) {
-      System.out.println("Fatal Error Trying to Connect: "+e);
-      System.out.print(e.getMessage());
+      System.out.println("Fatal Error Trying to Connect: ");
+      e.printStackTrace();
     }
 
     return connection;
