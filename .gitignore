@@ -12,3 +12,6 @@ out/
 *.ear
 *.nar
 hs_err_pid*
+Maven/target/maven-status/
+Maven/target/generated-test-sources/
+Maven/target/generated-sources/
