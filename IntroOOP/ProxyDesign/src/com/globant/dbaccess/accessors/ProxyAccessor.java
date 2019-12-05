@@ -1,44 +1,59 @@
-package com.globant.dbaccess.accessors;
-
-import java.sql.SQLDataException;
-import java.sql.Statement;
-
-/*
- *    This proxy class serves as a surrogate of a real DB Accessor Class. *
- *    Its function is to prevent the DB from filling with incorrect data, *
- *    and also handling Authentication of users.                          *
+/**
+ * <p>This proxy class serves as a surrogate of a real {@link com.globant.dbaccess.accessors.DBAccessor} type class. </p>
+ * <p>Its function is to prevent the DB from filling with incorrect data,
+ * and also handling the authentication of users.</p>
+ * <p>For more info on the methods, see {@link com.globant.dbaccess.accessors.DBAccessor} Interface</p>
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
  */
 
+package com.globant.dbaccess.accessors;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ProxyAccessor implements DBAccessor {
 
   private DBAccessor realAccessor; // Real Accessor
 
-  // Specific Accessor protocol is passed to the Constructor
+
+
+  /**
+   * Constructor method assigns the DB Connection protocol to the proxy's actual surrogated instance
+   * @since 1.0
+   */
   public ProxyAccessor(String protocol) {
-    // Accessor Type
-    if (protocol.equalsIgnoreCase("MYSQL")) {
+    if ("MYSQL".equalsIgnoreCase(protocol)) {
       this.realAccessor = new MySQLAccessor();
-    } else if (protocol.equalsIgnoreCase("POSTGRESQL")) {
+    } else if ("POSTGRESQL".equalsIgnoreCase(protocol)) {
       this.realAccessor= new PostgreSQLAccessor();
-    } else if (protocol.equalsIgnoreCase("ORACLESQL")) {
+    } else if ("ORACLESQL".equalsIgnoreCase(protocol)) {
       this.realAccessor= new OracleSQLAccessor();
     }
   }
 
-  // Catches failed connections
+  /**
+   * @return true
+   * @since 1.1
+   */
   @Override
-  public void connect(String url, String userName, String password) {
+  public boolean connect(String url, String userName, String password) {
     try {
       realAccessor.connect(url,userName,password);
-    } catch(Exception e) {
+    } catch(SQLException e) {
       e.printStackTrace();
     }
+    return true;
   }
 
-  // Implements DataSet
+  /**
+   * @return true
+   * @since 1.1;
+   */
   @Override
-  public void executeDataSet(Statement[] querys){
+  public boolean executeDataSet(Statement[] querys){
     if (checkValidity(querys).equals(Boolean.TRUE)){
       realAccessor.executeDataSet(querys);
     } else {
@@ -48,11 +63,15 @@ public class ProxyAccessor implements DBAccessor {
         e.printStackTrace();
       }
     }
+    return true;
   }
 
-  // Implements DataRead
+  /**
+   * @return true
+   * @since 1.1;
+   */
   @Override
-  public void executeDataRead(Statement[] querys) {
+  public boolean executeDataRead(Statement[] querys) {
     if (checkValidity(querys).equals(Boolean.TRUE)){
       realAccessor.executeDataRead(querys);
     } else {
@@ -62,11 +81,10 @@ public class ProxyAccessor implements DBAccessor {
         e.printStackTrace();
       }
     }
+    return true;
   }
 
-  // Checks if the SQL Statements are correct
   private Boolean checkValidity(Statement[] querys) {
-    // I'll make it always return true, as I don't know the specific details of this proxy's validation
     return Boolean.TRUE;
   }
 }

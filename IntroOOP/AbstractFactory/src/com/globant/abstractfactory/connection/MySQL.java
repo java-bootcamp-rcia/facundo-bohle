@@ -1,24 +1,35 @@
+/**
+ * MySQL represents a connection to an external MySQL DB dependency.
+ * For more info on its methods, check {@link com.globant.abstractfactory.connection.SQLConnection}
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
+
 package com.globant.abstractfactory.connection;
 import java.util.logging.Logger;
 
 
 public class MySQL implements SQLConnection {
 
-  // Session Data
   private String userName;
   private String password;
   private String url;
   private String protocol= "mysql";
 
-  // Logging
+
   private Logger log = Logger.getLogger(MySQL.class.getName());
 
   @Override
-  // This method should actually return a java.sql.Connection type Object
-  // But since it's a Mock, it just returns void
 
-  public void connect(){
+  /**
+   * @return true
+   * @since 1.0
+   */
+  public boolean connect(){
     log.info("Connecting to MYSQL Database...");
     log.info("Success: Connection to MySQL Established.");
+    return true;
   }
 }

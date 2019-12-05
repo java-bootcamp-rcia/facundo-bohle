@@ -1,13 +1,31 @@
-package com.globant.builder.connection;
+/**
+ * <p>
+ *  ConnectionItem represents an entity of an ingredient neccesary in a
+ * {@link java.sql.Connection} type object. A connection item can be a:
+ *  <ul>
+ *    <li> Database URL</li>
+ *    <li> Username</li>
+ *   <li> Password</li>
+ *  </ul>
+ * </p>
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 
+package com.globant.builder.connection;
 import java.util.Scanner;
 
 public abstract class ConnectionItem {
 
-  // Connection item field
   protected String value="";
 
-  // Retrieves info
+
+  /**
+   * @return a String type object containing information about the item's value
+   * @since 1.1
+   */
   public String getValue() {
     if (this.value.equals("")) {
       Scanner input = new Scanner(System.in);

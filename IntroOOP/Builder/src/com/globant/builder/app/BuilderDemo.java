@@ -1,9 +1,14 @@
-package com.globant.builder.app;
-
-/* Main App         *
- * Runs the Builder *
+/**
+ * BuilderDemo serves as an application class to run and test the creation and implementation
+ * of a {@link com.globant.builder.connection.ConnectionBuilder} instance
+ *
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
  */
 
+package com.globant.builder.app;
 import com.globant.builder.connection.ConnectionBuilder;
 import com.globant.builder.connection.DBConnection;
 import java.sql.SQLException;

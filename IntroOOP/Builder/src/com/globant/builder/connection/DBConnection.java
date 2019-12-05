@@ -1,5 +1,14 @@
+/**
+ *  DBConnection is an entity which represents a SQL Connection.
+ *  It contains a {@link java.sql.Connection} type object, as well as a
+ *  {@link java.util.List} type array with metadata about the Connection.
+ *
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.builder.connection;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,8 +19,13 @@ public class DBConnection {
   private List<ConnectionItem> connectionData= new ArrayList<>();
   private Connection connection;
 
-  // Creates a session by instantiating a url, user and password.
-  public void authenticate() {
+
+  /**
+   * Creates the necessary Connection items and attaches them to the current Connection
+   * @return void
+   * @since 1.0
+   */
+  public void getConnectionDetails() {
     if (connectionData.isEmpty()) {
       try {
         System.out.println("Authenticating Session Details......");
@@ -31,6 +45,12 @@ public class DBConnection {
     }
   }
 
+  /**
+   * Passes the data stored in this.connectionData (ArrayList) to a {@link java.sql.Connection}
+   * type instance, calling {@link java.sql.DriverManager}'s static method getConnection();
+   * @return void
+   * @since 1.0
+   */
   public void connect() throws SQLException {
     System.out.println("Connecting...");
     try {

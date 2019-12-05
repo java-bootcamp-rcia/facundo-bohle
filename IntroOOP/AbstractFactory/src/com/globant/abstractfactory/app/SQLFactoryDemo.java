@@ -1,5 +1,14 @@
-package com.globant.abstractfactory.app;
+/**
+ * SQLFactoryDemo serves as an application class to run and test the production
+ * and implementation of {@link com.globant.abstractfactory.factory.SQLFactory} type extended objects.
+ *
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 
+package com.globant.abstractfactory.app;
 import com.globant.abstractfactory.connection.SQLConnection;
 import com.globant.abstractfactory.factory.FactoryProducer;
 import com.globant.abstractfactory.factory.SQLFactory;

@@ -1,8 +1,16 @@
+/**
+ *  DBConnectionDemo serves as an application class to run and test a {@link com.globant.singletondb.DBConnection}
+ *
+ * @author bohledevs
+ * @version 1.1
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
+
 package com.globant.singletondb;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-// Runnable Class
 public class DBConnectionDemo {
   public static void main (String[] args) {
     Logger log= Logger.getLogger(DBConnectionDemo.class.getName());
@@ -13,11 +21,8 @@ public class DBConnectionDemo {
 
     // Tries to retrieve the connection (Will fail as it's not a real database)
     try {
-      if (conn.getConnection()==null) {
+        conn.getConnection();
         throw new SQLException("Connection Lost");
-      } else {
-        log.info("Connection Successfully Established.");
-      }
     } catch (Exception e){
       log.info("Connection Failed.");
     }
