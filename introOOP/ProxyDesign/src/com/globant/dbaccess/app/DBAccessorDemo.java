@@ -1,9 +1,16 @@
+/**
+ * DBAcessorDemo serves as an application class to run and test the Proxy Designed DBAccessor scheme
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.dbaccess.app;
 
 import com.globant.dbaccess.accessors.DBAccessor;
 import com.globant.dbaccess.accessors.ProxyAccessor;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Logger;
 
 public class DBAccessorDemo {
