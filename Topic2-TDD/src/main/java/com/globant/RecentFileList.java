@@ -1,5 +1,15 @@
-package com.globant;
+/**
+ * <p>This class serves as an entity to represent
+ * a real Recent File List which holds up to 15 most
+ * recent files</p>
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 
+package com.globant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +18,12 @@ import java.util.List;
 
     private List<String> recentList= new ArrayList<>();
 
+
+    /**
+     * @param fileURLs a collection Array of String type file URLS
+     * @return true, once files had been added to the list
+     * @since 1.0
+     */
     public boolean open(String...fileURLs) {
       for (String fileURL: fileURLs) {
         open(fileURL);
@@ -15,6 +31,12 @@ import java.util.List;
       return true;
     }
 
+
+    /**
+     * @param fileURL a String type file URL to be opened
+     * @return true, once file has been added to the list
+     * @since 1.0
+     */
     public boolean open(String fileURL) {
 
       if (isDuplicated(fileURL)) {
@@ -31,10 +53,19 @@ import java.util.List;
       return true;
     }
 
+    /**
+     *
+     * @return a List<String> ArrayList containing the URL of the most recent opened files
+     * @since 1.0
+     */
     public List getList() {
       return recentList;
     }
 
+    /**
+     * @return a list of all the most recent files opened to the stdout
+     * @since 1.0
+     */
     // Prints the Recent Files List and returns newest file
     public String printList() {
       int newestIndex= recentList.size()-1;
