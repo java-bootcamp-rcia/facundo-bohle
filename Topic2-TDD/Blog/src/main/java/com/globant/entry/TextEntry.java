@@ -1,3 +1,12 @@
+/**
+ * TextEntry is a specialization of {@link com.globant.entry.Entry}
+ * and provides behavior for the management of Text type inputs
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.entry;
 
 public class TextEntry extends Entry {
@@ -7,6 +16,7 @@ public class TextEntry extends Entry {
   public TextEntry(int blogId) {
     super(blogId);
   }
+
 
   public void writeText(String text) {
     this.text=text;
@@ -24,6 +34,12 @@ public class TextEntry extends Entry {
     return text;
   }
 
+  /**
+   * Specialization of method {@link com.globant.entry.Entry}.printEntry() but adds the text
+   * content at the end.
+   * @return true, after the listing had been printed
+   * @since 1.0
+   */
   @Override
   public boolean printEntry() {
     super.printEntry();

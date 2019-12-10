@@ -1,3 +1,12 @@
+/**
+ * BlogDemo is a class which serves as an application to run the Blog Creator Software
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
+
 package com.globant.app;
 import static java.lang.System.out;
 
@@ -66,6 +75,14 @@ public class BlogDemo {
     System.out.println("Bye....");
   }
 
+  /**
+   * serves the purpose of printing a menu with options to the console
+   * each time the user has to perform an action with his new blog.
+   * @return void
+   * @param blog is a unique Blog entity
+   * @since 1.0
+   */
+
   public static void printOptions(Blog blog) {
     out.println("-------------"+blog.getName()+"--------------");
     out.println("1. Create a New Entry");
@@ -73,6 +90,11 @@ public class BlogDemo {
     out.println("3. Get Out");
   }
 
+  /**
+   * @throws Exception when a key other than Enter is pressd
+   * @return void
+   * @since 1.0
+   */
   public static void pressKeyToContinue() {
     System.out.println("Press Enter key to continue...");
     try

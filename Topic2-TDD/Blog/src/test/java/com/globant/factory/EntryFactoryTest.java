@@ -7,14 +7,10 @@ import static org.mockito.Mockito.verify;
 
 
 import com.globant.database.DBAccessor;
-import com.globant.entry.Entry;
-import com.globant.entry.TextEntry;
-import com.globant.entry.VideoEntry;
-import org.junit.After;
-import org.junit.Test;
+import com.globant.entry.*;
+import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)

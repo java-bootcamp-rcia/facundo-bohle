@@ -1,9 +1,19 @@
+/**
+ * EntryFactory is an entity which follows the Factory Design Pattern for the production
+ * and storage of Entry type objects
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
+
 package com.globant.factory;
 
 import com.globant.database.DBAccessor;
-import com.globant.entry.Entry;
-import com.globant.entry.TextEntry;
-import com.globant.entry.VideoEntry;
+import com.globant.entry.*;
+
+
 
 public class EntryFactory {
 
@@ -13,11 +23,20 @@ public class EntryFactory {
   private EntryFactory() {}
 
 
+
   public static EntryFactory getInstance() {
     return instance;
   }
 
-
+  /**
+   * Produces and stores {@link com.globant.entry.Entry} type objects to an user's blog
+   * @throws java.sql.SQLException when the DB can not be accessed
+   * @return the last added {@link com.globant.entry.Entry}
+   * @param blogId id of the new entry's blog
+   * @param accessor database management acessor object
+   * @param entryData An array with the data that the user inputs in {@link com.globant.app.BlogDemo} implementation
+   * @since 1.0
+   */
   public Entry newEntry(int blogId, DBAccessor accessor,String...entryData) {
     Entry entry = null;
 
@@ -36,6 +55,14 @@ public class EntryFactory {
     return entry;
   }
 
+  /**
+   * Stores the entry in a remote DB dependency
+   * @throws java.sql.SQLException when the DB dependency can not be accessed
+   * @return  true, after saving
+   * @param entry an entry {@link com.globant.entry.Entry} type object
+   * @param accessor database management acessor object
+   * @since 1.0
+   */
   public boolean save(Entry entry, DBAccessor accessor) {
     return accessor.executeDataRead(entry);
   }

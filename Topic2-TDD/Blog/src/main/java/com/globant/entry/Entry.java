@@ -1,3 +1,14 @@
+/**
+ * Entry is a generalization of a Blog entry which serves the purpose of being a common ground for
+ * {@link com.globant.entry.TextEntry} and {@link com.globant.entry.VideoEntry} implementations
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
+
+
 package com.globant.entry;
 
 import java.time.LocalDateTime;
@@ -19,6 +30,11 @@ public class Entry {
   }
 
 
+  /**
+   * Prints a listing with all the data about an unique {@link com.globant.entry.Entry} implementation
+   * @return true after the listing has been printed
+   * @since 1.0
+   */
   public boolean printEntry() {
     System.out.println("Created: "+creationDate);
     System.out.println("title: "+title);

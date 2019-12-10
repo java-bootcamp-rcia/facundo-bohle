@@ -4,11 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import com.globant.entry.Entry;
-import com.globant.entry.TextEntry;
-import com.globant.entry.TextEntryTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 
 public class BlogTest {
