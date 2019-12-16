@@ -1,0 +1,401 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: 'Shopping Cart API'
+  description: 'This API allows comercial entities to implement the functionalities of a virtual Shopping Cart.'
+
+schemes:
+ - https
+ 
+ 
+tags: 
+  - name: "Shopping Cart"
+    description: "Cart management"
+  - name: "User"
+    description: "User management"
+
+paths:
+
+  /cart:
+    
+    # This should actually just send an ID and my Domain Model connect to the
+    # stock data afterwards, but since I've yet to learn about DB management
+    # I'll just ask the user to send the in-memory object instead.
+  
+    post:
+      tags:
+      - "Shopping Cart"
+      summary: "Add new item in the cart"
+      description: " User indicates the Shopping Service to add a new item in his cart"
+      operationId: "addItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "query"
+          name: "name"
+          type: "string"
+          required: true
+
+        - in: "query"
+          name: "quantity"
+          description: "quantity of items to buy"
+          type: "number"
+          format: "double"
+          required: true
+          
+        - in: "query"
+          name: "price"
+          description: "Price of each item"
+          type: "number"
+          format: "double"
+          required: true
+          
+        - in: "query"
+          name: "discount"
+          description: "Discount on percentage rate"
+          type: "number"
+          format: "double"
+          required: true
+        
+      responses:
+        200:
+          description: "Successful Request - Item(s) added to Cart"
+        405:    
+          description: "Failed Request - Invalid Inputs"
+
+   
+    get:
+      tags:
+      - "Shopping Cart"
+      summary: "Retrieve all items"
+      description: "Retrieve a list of all the items pending in your cart."
+      operationId: "getAllItems"
+      produces:
+      - "application/json"
+      
+      responses:
+        202:
+          description: "Successful Request - Retrieving items in Cart"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Item"
+    
+    delete:
+      tags:
+      - "Shopping Cart"
+      summary: "Reset your cart"
+      description: "Deletes all items in an existing cart."
+      operationId: "deleteAll"
+      produces:
+      - "application/json"
+      
+      responses:
+        202:
+          description: "Successful request - Cart has been reset."
+        401:
+          description: "Unauthorized to make such call."
+        500:
+          description: "Error while trying to reset. Try again."
+
+  /cart/{itemId}:
+    get:
+      tags:
+      - "Shopping Cart"
+      summary: "Retrieve an Item"
+      description: "Retrieves a Item object with relevant info about a certain item in a cart."
+      operationId: "getItem"
+      produces:
+      - "application/json"
+      parameters:
+      
+      - in: "query"
+        name: "cartId"
+        description: "Id of an users' cart"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      - in: "path"
+        name: "itemId"
+        description: "Id of item to return"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      responses:
+        200:
+          description: "Successful request - Item Retrieved"
+          schema:
+            $ref: "#/definitions/Item"
+        404:
+          description: "Item not found"
+        405: 
+          description: "Failed request - item or cart not found"
+            
+    delete:
+      tags:
+      - "Shopping Cart"
+      summary: "Delete an item"
+      description: "Deletes an item from the current cart."
+      operationId: "deleteItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      
+      - in: "query"
+        name: "cartId"
+        description: "Id of an users' cart"
+        type: "integer"
+        format: "int32"
+        required: true
+        
+      - in: "path"
+        name: "itemId"
+        description: "Id of item to be deleted"
+        type: "integer"
+        format: "int32"
+        required: true
+      responses:
+        202:
+          description: "Successful Request - Item deleted"
+        404:
+          description: "Error - Item not found"
+
+    put:
+      tags:
+      - "Shopping Cart"
+      summary: "Update item"
+  
+      description: "Allows you to update one of the following fields in an item: quantity, price, discount. One should be updated at a time"
+      operationId: "updateItem"
+      
+      parameters:
+      - in: "path"
+        name: "itemId"
+        description: "ID of item to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated (quantity/price/discount)"
+        type: "string"
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "number"
+        format: "double"
+        required: true
+      
+      responses:
+        202: 
+          description: "Sucessful Request - Item Updated"
+        404:
+          description: "Error - Item not found"
+
+        405: 
+          description: "Wrong input"
+          schema:
+            type: "string"
+            example: "Cannot add that much quantity! Not enough in stock."
+         
+  /user:
+    post:
+      tags:
+      - "User"
+      summary: "Add new User"
+      operationId: "newUser"
+      parameters:
+      
+      - in: "query"
+        name: "age"
+        type: "number"
+        required: true
+      
+      - in: "query"
+        name: "firstName"
+        type: "string"
+        required: false
+      
+      - in: "query"
+        name: "lastName"
+        type: "string"
+        required: false
+        
+      - in: "query"
+        name: "userName"
+        type: "string"
+        required: true
+  
+      - in: "query"
+        name: "password"
+        type: "string"
+        required: true
+        
+      - in: "query"
+        name: "email"
+        type: "string"
+        required: false
+        
+      responses:
+        200:
+          description: "Successful request - User added"
+        405:
+          description: "Error while trying to add user"
+    
+    get:
+      tags:
+      - "User"
+      summary: "Get All Users"
+      description: "Gets all currently registered users"
+      operationId: "getUsersList"
+  
+      responses:
+        202:
+          description: "OK - Retrieving User List"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+    
+  /user/{userId}:
+    get:
+      tags:
+      - "User"
+      summary: Get user info by Id
+      operationId: "getUserInfo"
+      parameters:
+      
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+      
+      responses:
+        202:
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "Error - User Does Not Exist"
+    put:
+      tags:
+      - "User"
+      summary: "Update User"
+  
+      description: "Allows you to update one of the following fields in an user: username, password, email. One should be updated at a time"
+      operationId: "updateUser"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "ID ofuser to be updated"
+        type: "integer"
+        format: "int32"
+        required: true
+            
+      - in: "query"
+        name: "field"
+        description: "field to be updated (username/password/email)"
+        type: "string"
+        required: true
+        
+      - in: "query"
+        name: "value"
+        description: "New value of the previous field"
+        type: "string"
+        required: true
+      
+      responses:
+        202:
+          description: "Successful Request - User Updated"
+        404:
+          description: "Error - User Does Not Exist"
+      
+    delete:
+      tags:
+      - "User"
+      summary: "Delete an user"
+      description: "Delete an user indicating his ID"
+      operationId: "deleteUser"
+      
+      parameters:
+      - in: "path"
+        name: "userId"
+        type: "integer"
+        format: "int32"
+        required: true
+        
+      responses:
+        202:
+          description: "Successful Request - User Deleted"
+        404:
+          description: "Error - User Does Not Exist"
+      
+definitions:
+  Item: 
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+        format: "int32"
+        example: "0012"
+      name:
+        type: "string"
+        example: "Adidas 270 Sneaker"
+      quantity:
+        type: "number"  # "1" if it's a unit, "2.3kg" if it's not
+        format: "double"
+        example: "2.0"
+      price:
+        type: "number"  # in US Dollars
+        format: "double"
+        example: "27.00"
+      discount:
+        type: "number"
+        format: "double"
+        example: "2.7"
+        
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+        example: "001"
+      cartId:
+        type: "integer"
+        format: "int32"
+        example: "007"
+      age:
+        type: "integer"
+        format: "int32"
+        example: "27"
+      firstName:
+        type: "string"
+        example: "Facundo"
+      lastName:
+        type: "string"
+        example: "Bohle"
+      userName:
+        type: "string"
+        example: "bohledevs"
+      password:
+        type: "string"
+        example: "bohle95"
+      email:
+        type: "string"
+        example: "facu@yahoo.com"
+        
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /bohledevs/ShoppingCartAPI/1.0.0
