@@ -113,6 +113,14 @@ public class ShoppingService {
     return "Successful Request - Item Deleted";
   }
 
+  public static String deleteAll(int cartId) {
+    currentCart=getCart(cartId);
+    if (currentCart==null)
+      return "Error while trying to reset. Try again.";
+    currentCart.getItemsArrayList().clear();
+    return "Successful request - Cart has been reset.";
+  }
+
   /**
    * @return a {@link java.lang.String} type object, containing either an Error or Success message
    * @param field a changeable {@link com.globant.cart.Item} instance field (quantity/price/discount)
