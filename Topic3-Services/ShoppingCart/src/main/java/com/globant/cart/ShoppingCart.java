@@ -1,3 +1,11 @@
+/**
+ * Shopping Cart is an entity which represents a real-life shopping cart.
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.cart;
 
 import com.google.gson.Gson;
@@ -24,14 +32,15 @@ public class ShoppingCart {
 
   public String getItem(int id) {
     Item foundItem=null;
-    try{
-      for (Item item: items) {
-        if (item.getId()==id)
-          foundItem=item;
-      }
-    } catch (Exception e) {
-      return "Error - Item with that id doesn't exist";
+
+    for (Item item: items) {
+      if (item.getId() == id)
+        foundItem = item;
     }
+
+    if (foundItem==null)
+      return "Error - Item with that id doesn't exist";
+
     return convertToJson(foundItem);
   }
 

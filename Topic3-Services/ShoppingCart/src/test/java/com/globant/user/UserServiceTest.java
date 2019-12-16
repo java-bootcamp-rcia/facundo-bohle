@@ -62,7 +62,7 @@ public class UserServiceTest {
   @After
   public void tearDown() {
     usersList.clear();
-    ShoppingService.getCartList().clear();
+    ShoppingService.getCartArrayList().clear();
   }
 
 

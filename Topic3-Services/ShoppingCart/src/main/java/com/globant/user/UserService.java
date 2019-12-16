@@ -1,3 +1,11 @@
+/**
+ * Static class UserService encapsulates all the activities related to the management of {@link com.globant.user.User} instances,
+ * It's the platform which the API user interacts with.
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.user;
 
 import com.globant.cart.ShoppingService;
@@ -12,7 +20,14 @@ public class UserService {
 
   private UserService() {}
 
-  public static boolean newUser(int age, String firstName, String lastName, String userName, String password, String email)  throws Exception {
+
+  /**
+   *
+   * @throws Exception when wrong data has been input
+   * @return true or false, depending on If the {@link com.globant.user.User} instance was created or not
+   * @since 1.0
+   */
+  public static boolean newUser(int age, String firstName, String lastName, String userName, String password, String email) {
 
    // Error checking
     try {
@@ -54,14 +69,29 @@ public class UserService {
     return true;
   }
 
+  /**
+   * Responds to a request for an user list as ArrayList
+   * @return a collection of {@link com.globant.user.User} objects as a {@link java.util.ArrayList} (To be used by application logic only)
+   * @since 1.0
+   */
   public static List<User> getUsersArrayList() {
     return users;
   }
 
+  /**
+   * Responds to a request for an user list as JSon
+   * @return a Json string representing a collection of {@link com.globant.user.User} type objects
+   * @since 1.0
+   */
   public static String getUsersList() {
     return convertToJson(users);
   }
 
+  /**
+   * Responds to a request for an individual User's accessible information
+   * @return a single {@link com.globant.user.User} type object as Json string
+   * @since 1.0
+   */
   public static String getUserInfo(int id) {
     User requested = getUser(id);
 
@@ -72,7 +102,13 @@ public class UserService {
 
   }
 
-
+  /**
+   * Updates permitted {@link com.globant.user.User} instace fields (one at a time)
+   * @return true or false, depending on if the Update could be carried on
+   * @param field a changeable {@link com.globant.user.User} instance field (username/password/email)
+   * @param value a {@link java.lang.String} containing the value of said field
+   * @since 1.0
+   */
   public static boolean updateUser(int id, String field, String value) {
     if (isInList(id)) {
       User user = getUser(id);
@@ -94,6 +130,10 @@ public class UserService {
     return false;
   }
 
+  /**
+   * @return true or false, depending on if the deletion was carried on
+   * @since 1.0
+   */
   public static boolean deleteUser(int id) {
     if (!isInList(id))
       return false;

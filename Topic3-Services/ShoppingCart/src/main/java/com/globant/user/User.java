@@ -1,3 +1,11 @@
+/**
+ * User represents a real-life customer of a commercial premise, brought to a web platform
+ *
+ * @author bohledevs
+ * @version 1.0
+ * @see <a href="https://github.com/bohledevs">My GitHub</a>
+ *
+ */
 package com.globant.user;
 
 import java.time.LocalDateTime;

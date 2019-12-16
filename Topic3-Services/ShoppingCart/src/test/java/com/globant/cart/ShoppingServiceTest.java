@@ -14,7 +14,7 @@ import org.mockito.Spy;
 
 public class ShoppingServiceTest {
 
-  private List<ShoppingCart> cartList= ShoppingService.getCartList();
+  private List<ShoppingCart> cartList= ShoppingService.getCartArrayList();
 
   @Spy
   User spyUser= new User(1,2,23,null,"","","","","");
@@ -43,7 +43,7 @@ public class ShoppingServiceTest {
   public void canDeleteItem() {
    String result= ShoppingService.deleteItem(1,1);
 
-   assertTrue(ShoppingService.getCartList().get(0).getItemsArrayList().isEmpty());
+   assertTrue(ShoppingService.getCartArrayList().get(0).getItemsArrayList().isEmpty());
    assertEquals("Was not deleted.",result,"Successful Request - Item Deleted");
   }
 
@@ -71,6 +71,6 @@ public class ShoppingServiceTest {
 
   @After
   public void tearDown() {
-    ShoppingService.getCartList().clear();
+    ShoppingService.getCartArrayList().clear();
   }
 }
