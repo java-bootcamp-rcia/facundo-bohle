@@ -7,7 +7,7 @@
  *
  */
 
-package com.globant;
+package com.globant.cart;
 
 public class Item {
   private int id;

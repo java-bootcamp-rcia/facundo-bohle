@@ -1,4 +1,4 @@
-package com.globant;
+package com.globant.cart;
 
 import static junit.framework.TestCase.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -7,7 +7,7 @@ import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+import com.globant.user.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -17,8 +17,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 public class ShoppingCarTest {
 
+  @Mock
+  User mockUser;
+
   @Spy
-  ShoppingCart spyCart = new ShoppingCart();
+  ShoppingCart spyCart = new ShoppingCart(0);
 
   @Test
   public void givenCartIsEmpty_whenCallGetItems_thenItDoesNotFail() {

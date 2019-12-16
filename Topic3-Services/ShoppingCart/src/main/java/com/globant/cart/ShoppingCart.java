@@ -1,11 +1,18 @@
-package com.globant;
+package com.globant.cart;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
+
+  private int id;
   private List<Item> items= new ArrayList<>();
+
+
+  public ShoppingCart(int id) {
+    this.id=id;
+  }
 
   public String getAllItems() {
       return convertToJson(items);
@@ -16,19 +23,23 @@ public class ShoppingCart {
   }
 
   public String getItem(int id) {
+    Item foundItem=null;
     try{
-      items.get(id);
+      for (Item item: items) {
+        if (item.getId()==id)
+          foundItem=item;
+      }
     } catch (Exception e) {
       return "Error - Item with that id doesn't exist";
     }
-    return convertToJson(items.get(id));
+    return convertToJson(foundItem);
   }
 
 
   /**
-   * Adds item when user introduces a {@link com.globant.Item} type object
+   * Adds item when user introduces a {@link Item} type object
    * @return true if added, false if an error occurred
-   * @param item a {@link com.globant.Item} type object
+   * @param item a {@link Item} type object
    * @since 1.0
    */
   public boolean addItem(Item item) {
@@ -42,7 +53,7 @@ public class ShoppingCart {
 
   /**
    * Adds item when user introduces new item values parameter by parameter
-   * @return  true if added, false if an error occurred
+   * @return  true if added, cfalse if an error occurred
    * @param id Item's id
    * @param name Item's name
    * @param doubles an array containing double type numbers in the next order: Quantity, price, discount
@@ -142,4 +153,7 @@ public class ShoppingCart {
     return false;
   }
 
+  public int getId() {
+    return id;
+  }
 }
