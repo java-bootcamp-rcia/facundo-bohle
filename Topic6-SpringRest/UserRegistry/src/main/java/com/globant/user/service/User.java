@@ -1,4 +1,4 @@
-package com.globant;
+package com.globant.user.service;
 
 import lombok.Data;
 import javax.persistence.Entity;
@@ -12,12 +12,14 @@ public class User {
     private String username;
     private String nickname;
     private String password;
+    private String email;
 
     protected User() {}
 
-    public User(String username, String nickname, String password) {
+    public User(String username, String nickname, String password, String email) {
         this.username= username;
         this.nickname=nickname;
         this.password=password;
+        this.email=email;
     }
 }
