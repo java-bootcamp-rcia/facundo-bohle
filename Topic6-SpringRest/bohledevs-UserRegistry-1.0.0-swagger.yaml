@@ -1,0 +1,180 @@
+swagger: '2.0'
+info:
+  description: |
+    This API is a sample User Registry management server.
+  version: 1.0.0
+  title: "User Register API"
+  contact:
+    email: "facubohle2@gmail.com"
+
+tags:
+- name: "User"
+  description: "Everything regarding user management"
+
+
+paths:
+  /users:
+    post:
+      tags:
+      - "User"
+      summary: "Add user"
+      operationId: "addUser"
+      parameters:
+      
+      - in: "query"
+        name: "username"
+        type: "string"
+        maxLength: 30
+        required: true
+        
+      - in: "query"
+        name: "nickname"
+        type: "string"
+        maxLength: 30
+        required: true
+        
+      - in: "query"
+        name: "password"
+        description: "String array of length (2): [password, repeatPassword]"
+        type: "array"
+        items:
+          type: "string"
+        maxLength: 16
+        required: true
+      
+      - in: "query"
+        name: "email"
+        type: "string"
+        required: false
+      
+      responses:
+        202:
+          description: "User was added successfully"
+          schema:
+           $ref: "#/definitions/User"
+        409:
+          description: "Conflict of existence"
+          schema:
+            type: "string"
+            example: "User already Exist"
+        405: 
+          description: "Invalid Input"
+          schema:
+            type: "string"
+            example: "Passed max capacity of username characters."
+
+  /users/{username}:
+    get: 
+      tags:
+      - "User"
+      summary: "Get user by username"
+      description: "This request should be done using the creation username, not the nickname."
+      operationId: "getUser"
+      parameters:
+      
+      - $ref: "#/components/parameters/username"
+      
+      responses:
+        202:
+          description: "Ok - Sucessfull GET Request"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "Resource not found"
+  
+    put:
+      tags:
+      - "User"
+      summary: "Update user with form data"
+      description: "Update user by redefining it's relevant fields"
+      operationId: "updateUser"
+      parameters:
+      
+      - $ref: "#/components/parameters/username"
+        
+      - in: "query"
+        name: "nickname"
+        description: "Updated nickname"
+        type: "string"
+        maxLength: 30
+        required: false
+      
+      - $ref: "#/components/parameters/password"
+
+      responses:
+        202:
+          description: "OK - User updated"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "User not found"
+        400:
+          description: "Invalid Inputs"
+    
+    delete:
+      tags:
+      - "User"
+      summary: "Delete user"
+      description: "Deletes a user with a given username."
+      operationId: "deleteUser"
+      parameters:
+      
+      - $ref: "#/components/parameters/username"
+      
+      responses:
+        202:
+          description: "OK - User deleted"
+        404:
+          description: "User not found"
+  
+    
+    
+components:
+  parameters:
+  
+    username:
+      in: "path"
+      name: "username"
+      description: "User to be updated"
+      type: "string"
+      maxLength: 30
+      required: true
+      
+    password:
+      in: "query"
+      name: "password"
+      description: "String array of length (3): [oldPassword, newPassword, repeatNewPassword]"
+      type: "array"
+      items:
+        type: "string"
+
+    
+definitions:
+  User:
+    type: "object"
+    properties:
+      id: 
+        type: "number"
+        format: "long"
+        example: "0032"
+      username:
+        type: "string"
+        example: "bohledevs"
+      nickname:
+        type: "string"
+        example: "facuXx2020"
+      password:
+        type: "string"
+        example: "*****"
+      email: 
+        type: "string"
+        example: "facubohle2@gmail.com"
+        
+
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /bohledevs/UserRegistry/1.0.0
+schemes:
+ - https
+ - http
