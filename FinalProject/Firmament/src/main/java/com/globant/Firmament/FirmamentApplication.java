@@ -1,14 +1,13 @@
-package com.globant.weather;
+package com.globant.Firmament;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WeatherApplication {
+public class FirmamentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WeatherApplication.class, args);
+		SpringApplication.run(FirmamentApplication.class, args);
 	}
 
-	
 }
