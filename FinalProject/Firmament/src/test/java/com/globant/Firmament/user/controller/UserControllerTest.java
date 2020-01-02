@@ -1,6 +1,5 @@
 package com.globant.Firmament.user.controller;
 
-
 import com.globant.Firmament.user.model.User;
 import com.globant.Firmament.user.service.UserService;
 import org.junit.Test;
@@ -37,7 +36,6 @@ public class UserControllerTest {
     public void whenPostCalled_canRegisterUser() throws Exception {
         given(userService.saveUser(anyString(),anyString(),anyString(),anyString())).willReturn(null);
 
-
         MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders.post("/registration");
         mockHttpServletRequestBuilder.param("username","bohletest");
         mockHttpServletRequestBuilder.param("password","mypass321");
@@ -47,7 +45,6 @@ public class UserControllerTest {
         mockMvc.perform(mockHttpServletRequestBuilder)
                .andExpect(status().isOk())
                .andDo(print());
-
     }
 
     @Test
@@ -63,10 +60,7 @@ public class UserControllerTest {
                             .andDo(print())
                             .andReturn();
 
-
         String content= result.getResponse().getContentAsString();
-
-        System.out.println(content);
 
         assertEquals(content,"Logged In Successfully");
     }

@@ -63,4 +63,18 @@ public class WeatherControllerTest {
 
         assertEquals(content,"");
     }
+
+    @Test
+    public void canRetrieveMostRequestedCity() throws Exception {
+        given(weatherService.mostRequested()).willReturn(null);
+
+        MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders.get("/mostRequested");
+
+        MvcResult result = mockMvc.perform(mockHttpServletRequestBuilder)
+                                  .andExpect(status().isOk())
+                                  .andDo(print())
+                                  .andReturn();
+
+    }
+
 }

@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.aspectj.util.LangUtil.isEmpty;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,6 +42,22 @@ public class WeatherServiceTest {
         String forecast = weatherService.getForecast("London","United Kingdom");
         System.out.println(forecast)
         ;
+    }
+
+    @Test
+    public void canRetrieveMostRequestedCity() {
+
+        Object mostRequested = weatherService.mostRequested();
+
+        assertNotNull(mostRequested);
+
+    }
+
+    @Test
+    public void canRetrieveLeastRequestedCity() {
+        Object leastRequested = weatherService.leastRequested();
+
+        assertNotNull(leastRequested);
     }
 
 }

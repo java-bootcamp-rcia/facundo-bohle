@@ -43,12 +43,14 @@ public class UserServiceTest {
 
     @Test(expected = InputException.class)
     public void givenPasswordsMismatch_whenPost_thenReturnError() throws InputException{
+
       userService.saveUser("bohledevs3", "mypass321", "mypass", "none");
     }
 
     @Test
     public void givenNullParameters_whenPost_thenReturnError() {
         given(userRepository.save(any())).willReturn(null);
+
         userService.saveUser("bohledevs","","","none");
     }
 
@@ -60,7 +62,6 @@ public class UserServiceTest {
         given(userRepository.findByEmail(anyString())).willReturn(user);
 
         userService.saveUser("bohledevs","mypass1","mypass1","anotheremail@gmail.com");
-
     }
 
 
@@ -68,13 +69,14 @@ public class UserServiceTest {
 
     @Test(expected = InputException.class)
     public void givenBlankParams_whenLogIn_thenReturnError() {
+
         userService.logIn("","");
     }
 
     @Test(expected = UserNotFoundException.class)
     public void givenWrongUser_whenLogIn_thenReturnError() {
-
         given(userRepository.findByUsername(anyString())).willReturn(null);
+
         userService.logIn("nonexistent","321");
     }
 
@@ -96,14 +98,16 @@ public class UserServiceTest {
 
     @Test
     public void givenCorrectData_whenLogin_thenUpdateStatus() {
+
         User user= new User("bohledevs99","pass123","none");
         user.setStatus(false);
+
         given(userRepository.findByUsername(any())).willReturn(user);
         given(userRepository.save(any())).willReturn(user);
 
         userService.logIn("bohledevs99","pass123");
 
-        assertTrue(user.getStatus()==true);
+        assertTrue(user.getStatus());
     }
 
     // Log Out
@@ -111,6 +115,7 @@ public class UserServiceTest {
     @Test
     public void canLogOut() {
         User user = new User("bohledevs2","non","non");
+
         given(userRepository.findByUsername(anyString())).willReturn(user);
         given(userRepository.save(any())).willReturn(user);
 
@@ -118,12 +123,12 @@ public class UserServiceTest {
 
         assertFalse(user.getStatus());
         assertEquals(result, "Successfully Logged Out");
-
     }
 
     @Test(expected = InputException.class)
     public void givenUserIsAlreadyLoggedOut_whenLogOut_thenReturnError() {
         User user = new User("bohledevs2","non","non");
+
         given(userRepository.findByUsername(anyString())).willReturn(user);
         given(userRepository.save(any())).willReturn(user);
 
@@ -136,7 +141,5 @@ public class UserServiceTest {
         given(userRepository.findByUsername(anyString())).willReturn(null);
 
         userService.logOut("asdsa1");
-
     }
-
 }

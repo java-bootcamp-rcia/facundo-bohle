@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class WeatherService {
@@ -108,4 +109,13 @@ public class WeatherService {
         return;
     }
 
+    public Object mostRequested() {
+        Collection<Object> sortedCities = repository.findAllMostRequested();
+        return sortedCities.stream().findFirst().get();
+    }
+
+    public Object leastRequested() {
+        Collection<Object> sortedCities = repository.findAllLeastRequested();
+        return sortedCities.stream().findFirst().get();
+    }
 }

@@ -1,4 +1,4 @@
-package com.globant.Firmament.weather;
+package com.globant.Firmament.weather.repository;
 
 import com.globant.Firmament.weather.model.City;
 import com.globant.Firmament.weather.repository.CityRepository;
