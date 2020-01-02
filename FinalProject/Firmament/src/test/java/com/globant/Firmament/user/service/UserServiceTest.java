@@ -1,10 +1,9 @@
-package com.globant.Firmament.service;
+package com.globant.Firmament.user.service;
 
 import com.globant.Firmament.user.exception.InputException;
 import com.globant.Firmament.user.exception.UserNotFoundException;
 import com.globant.Firmament.user.model.User;
 import com.globant.Firmament.user.repository.UserRepository;
-import com.globant.Firmament.user.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,6 @@
-package com.globant.Firmament.repository;
+package com.globant.Firmament.user.repository;
 
 import com.globant.Firmament.user.model.User;
-import com.globant.Firmament.user.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
