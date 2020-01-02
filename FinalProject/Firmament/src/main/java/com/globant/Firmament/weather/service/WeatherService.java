@@ -48,7 +48,9 @@ public class WeatherService {
         Double rainProbability = today.getDouble("precipProbability");
         rainProbability*=100;
 
-        return Double.toString(rainProbability)+"%";
+        String output = "Today's Rain Probability for "+city+", "+country+"\n"+Double.toString(rainProbability)+"%";
+
+        return output;
     }
 
     private JSONObject getWeeklyForecast(String city, String country) {
