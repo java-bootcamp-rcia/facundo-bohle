@@ -1,19 +1,21 @@
 package com.globant.Firmament.weather.service;
 
+import com.globant.Firmament.weather.model.City;
 import com.globant.Firmament.weather.repository.CityRepository;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class WeatherService {
 
+    @Autowired
     private CityRepository repository;
 
     private RestTemplate restTemplate;
@@ -79,14 +81,31 @@ public class WeatherService {
         Double lat= coordinates.getDouble("lat");
         Double lng= coordinates.getDouble("lng");
 
-        System.out.println(coordinates);
-        System.out.println(lat);
-        System.out.println(lng);
-
         coords.add(Double.toString(lat));
         coords.add(Double.toString(lng));
 
+
+        persistCity(city,country,lat,lng);
+
         return coords;
+    }
+
+    private void persistCity(String name, String country, Double latitude, Double longitude) {
+
+        City city = repository.findByName(name);
+
+        if (city==null) {
+            City newCity = new City(name,country,latitude,longitude);
+            repository.save(newCity);
+            return;
+        }
+
+        System.out.println("Saving new city.... "+name);
+        city.setTimes_called((city.getTimes_called()+1));
+        repository.save(city);
+        System.out.println(name+" Successfully saved.");
+
+        return;
     }
 
 }

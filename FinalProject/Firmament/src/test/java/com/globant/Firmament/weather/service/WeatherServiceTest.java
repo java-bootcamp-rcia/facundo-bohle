@@ -1,5 +1,6 @@
 package com.globant.Firmament.weather.service;
 
+import com.globant.Firmament.weather.model.City;
 import com.globant.Firmament.weather.repository.CityRepository;
 import org.json.JSONArray;
 import org.junit.Before;
@@ -8,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.aspectj.util.LangUtil.isEmpty;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +24,6 @@ public class WeatherServiceTest {
     @Before
     public void setUp(){
         weatherService= new WeatherService(cityRepository);
-
     }
 
     @Test
