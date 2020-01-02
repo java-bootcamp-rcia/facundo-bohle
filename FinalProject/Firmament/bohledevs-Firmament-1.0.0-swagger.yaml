@@ -1,0 +1,208 @@
+swagger: '2.0'
+info:
+  description: "Firmament is a metereological & statistical Web Service ready to be used for any city in the world."
+
+
+  version: 1.0.0
+  title: "Firmament"
+  contact:
+    email: "facubohle2@gmail.com"
+
+
+# Added by API Auto Mocking Plugin
+host: "virtserver.swaggerhub.com"
+basePath: "/bohledevs/Firmament/1.0.0"
+# schemes:
+#  - http
+ 
+tags:
+- name: "User"
+- name: "Weather"
+
+ 
+paths:
+
+  /rain:
+    get:
+      tags:
+      - "Weather"
+      summary: "Today's Rain Probability"
+      description: "Retrieves percentage (not rate) of rain probability"
+      operationId: "getRainProbability"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/components/parameters/city"
+      - $ref: "#/components/parameters/country"
+      responses:
+        202:
+          description: "Successful Request"
+          schema:
+            type: "string"
+            example: "Today's Rain Probability for Berlin, Germany \n 19.0%"
+          
+  /forecast:
+    get:
+      tags:
+      - "Weather"
+      summary: "5-day Prediction"
+      description: "Retrieves an array of 5 objects with info about all the five next coming days."
+      operationId: "getForecast"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/components/parameters/city"
+      - $ref: "#/components/parameters/country"
+      responses:
+        202:
+          description: "Succesfull request"
+      
+  /mostRequested:
+    get:
+      tags:
+      - "Weather"
+      summary: "Most Requested City"
+      operationId: "mostRequested"
+      produces:
+      - "application/json"
+      responses:
+        202:
+          description: "Succesful Request"
+          schema:
+            $ref: "#/definitions/CityStat"
+            
+  /leastRequested:
+    get:
+      tags:
+      - "Weather"
+      summary: "Least Requested City"
+      operationId: "leastRequested"
+      produces:
+      - "application/json"
+      responses:
+        202:
+          description: "Successful Request"
+          schema:
+            $ref: "#/definitions/CityStat"
+            
+            
+  /registration:
+    post:
+      tags:
+      - "User"
+      summary: "Sign Up"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/components/parameters/username"
+      - $ref: "#/components/parameters/password"
+      - in: "query"
+        name: "email"
+        type: "string"
+        required: false
+      responses:
+       202:
+        description: "Successfully Signed Up"
+        schema:
+          $ref: "#/definitions/User"
+          
+  /login:
+    get:
+      tags:
+      - "User"
+      summary: "Sign In"
+      operationId: "logIn"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/components/parameters/username"
+      - $ref: "#/components/parameters/password"
+      responses:
+        202:
+          description: "Success"
+          schema:
+            type: "string"
+            example: "Succesfully Logged In"
+
+  /logout:
+    get: 
+      tags:
+      - "User"
+      summary: "Sign Out"
+      operationId: "logOut"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/components/parameters/username"
+      responses:
+        202:
+          description: "Success"
+          schema:
+            type: "string"
+            example: "Succesfully Logged Out"
+        400:
+          description: "Input Error"
+          schema:
+            type: "string"
+            example: "You're already logged out!"
+components:
+  parameters:
+    city:
+      in: "query"
+      name: "city"
+      type: "string"
+      maxlength: 12
+      required: true
+    country:
+      in: "query"
+      name: "country"
+      type: "string"
+      maxlength: 12
+      required: false
+    username:
+      in: "query"
+      name: "username"
+      type: "string"
+      maxlength: 12
+      required: true
+    password:
+      in: "query"
+      name: "password"
+      type: "string"
+      format: "password"
+      maxlength: 12
+      required: true;
+      
+definitions:
+  CityStat:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "Resistencia"
+      times_called:
+        type: "integer"
+        example: 3
+  User:
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+        example: 2
+      username:
+        type: "string"
+        example: "bohledevs"
+      password:
+        type: "string"
+        format: "password"
+        example: "mypass321"
+      email:
+        type: "string"
+        example: "myemail@yahoo.com"
+      status:
+        type: "boolean"
+        example: true
+# Added by API Auto Mocking Plugin
+schemes:
+ - https
+ - http
